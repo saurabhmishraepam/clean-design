@@ -1,6 +1,9 @@
 package com.epam.cleandesign.domain;
 
 
+import com.epam.cleandesign.exceptions.NotEligibleForMortgageException;
+
+
 public class Customer {
 
 
@@ -46,5 +49,17 @@ public class Customer {
         return badCreditHistoryCount;
     }
 
+    private boolean isEligibleForMortgage(Double amountRequested) {
+        if (getBadCreditHistoryCount() == 0 && getBalance() > 0)
+            return getBalance() * 2 >= amountRequested;
+        return false;
+    }
+
+    public void processMortgageRequest(Double amountRequested){
+        if (isEligibleForMortgage(amountRequested))
+            updateBalance(amountRequested);
+        else
+            throw new NotEligibleForMortgageException();
+    }
 
 }

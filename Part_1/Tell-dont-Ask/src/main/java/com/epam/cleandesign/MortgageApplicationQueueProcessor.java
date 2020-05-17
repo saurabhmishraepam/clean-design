@@ -3,7 +3,6 @@ package com.epam.cleandesign;
 
 import com.epam.cleandesign.domain.Customer;
 import com.epam.cleandesign.domain.CustomerRepository;
-import com.epam.cleandesign.exceptions.NotEligibleForMortgageException;
 import com.epam.cleandesign.exceptions.WrongDataException;
 
 
@@ -19,23 +18,8 @@ public class MortgageApplicationQueueProcessor {
 
     public void processRequest(int customerId, Double amountRequested) {
         Customer customer = customerRepository.get(customerId);
-
         if (customer == null)
             throw new WrongDataException(MESSAGE_INVALID_CUSTOMER);
-
-        if (isEligibleForMortgage(customer, amountRequested))
-            customer.updateBalance(amountRequested);
-        else
-            throw new NotEligibleForMortgageException();
+        customer.processMortgageRequest(amountRequested);
     }
-
-    private boolean isEligibleForMortgage(Customer customer, Double amountRequested) {
-        boolean isEligibleForMortgage = false;
-
-        if (customer.getBadCreditHistoryCount() == 0 && customer.getBalance() > 0)
-            isEligibleForMortgage = customer.getBalance() * 2 >= amountRequested;
-
-        return isEligibleForMortgage;
-    }
-
 }
