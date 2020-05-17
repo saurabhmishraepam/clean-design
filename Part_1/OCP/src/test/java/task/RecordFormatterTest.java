@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 
 public class RecordFormatterTest {
 
-    private RecordFormatter formatter = new RecordFormatter();
+
 
     @Test
     public void formatAddress() {
@@ -26,7 +26,7 @@ public class RecordFormatterTest {
         aRec.setBuilding("33");
         aRec.setApartment("N/A");
         aRec.setIndex("61000");
-        String fmt = formatter.format(aRec);
+        String fmt = aRec.format();
         assertThat(fmt, is("address: Ukraine, Kharkivska, Kharkiv, 23 Serpnya st., 33 b., N/A apt., 61000"));
     }
 
@@ -36,7 +36,7 @@ public class RecordFormatterTest {
         bRec.setYear(1989);
         bRec.setMonth(11);
         bRec.setDay(27);
-        String fmt = formatter.format(bRec);
+        String fmt = bRec.format();
         assertThat(fmt, is("birthday: 1989/11/27"));
     }
 
@@ -47,7 +47,7 @@ public class RecordFormatterTest {
         vRec.setCountry("Ukraine");
         vRec.setFrom(ZonedDateTime.of(2006, 7, 23, 0, 0, 0, 0, ZoneOffset.UTC));
         vRec.setTo(ZonedDateTime.of(2120, 7, 23, 0, 0, 0, 0, ZoneOffset.UTC));
-        String fmt = formatter.format(vRec);
+        String fmt = vRec.format();
         assertThat(fmt, is("visa: Ukraine, from: 2006-07-23T00:00Z, to: 2120-07-23T00:00Z"));
     }
 
@@ -60,7 +60,7 @@ public class RecordFormatterTest {
         workload.put(2, 90d);
         workload.put(3, 0d);
         wRec.setWorkload(workload);
-        String fmt = formatter.format(wRec);
+        String fmt = wRec.format();
         assertThat(fmt, is("workload: 1:100.0, 2:90.0, 3:0.0"));
     }
 
@@ -68,8 +68,8 @@ public class RecordFormatterTest {
     public void formatSkills() {
         SkillsRecord sRec = new SkillsRecord();
         sRec.setSkill("Java");
-        sRec.setLevel(SkillsRecord.Level.INTERMEDIATE);
-        String fmt = formatter.format(sRec);
+        sRec.setLevel(SkillLevel.INTERMEDIATE);
+        String fmt = sRec.format();
         assertThat(fmt, is("skills: Java=INTERMEDIATE"));
     }
 
@@ -77,8 +77,8 @@ public class RecordFormatterTest {
     public void formatFeedback() {
         FeedbackRecord fRec = new FeedbackRecord();
         fRec.setCriterion("Team work");
-        fRec.setQuality(FeedbackRecord.Quality.MEETS_EXPECTATION);
-        String fmt = formatter.format(fRec);
+        fRec.setQuality(FeedbackQuality.MEETS_EXPECTATION);
+        String fmt = fRec.format();
         assertThat(fmt, is("feedback: Team work=MEETS_EXPECTATION"));
     }
 }

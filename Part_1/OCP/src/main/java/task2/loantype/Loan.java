@@ -1,7 +1,9 @@
-package task2;
+package task2.loantype;
+
+import task2.Person;
 
 public abstract class  Loan {
-     abstract int getLoan(Person person);
+     abstract public int getLoan(Person person);
 
      public int multiply(int loan, int income) {
           return loan * getIncomeMultiplier(income);

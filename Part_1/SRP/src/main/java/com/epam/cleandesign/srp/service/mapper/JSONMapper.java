@@ -1,4 +1,4 @@
-package com.epam.cleandesign.srp;
+package com.epam.cleandesign.srp.service.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

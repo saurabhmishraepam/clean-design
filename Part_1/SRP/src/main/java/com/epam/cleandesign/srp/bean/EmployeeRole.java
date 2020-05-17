@@ -1,4 +1,4 @@
-package com.epam.cleandesign.srp;
+package com.epam.cleandesign.srp.bean;
 
 public enum EmployeeRole {
 

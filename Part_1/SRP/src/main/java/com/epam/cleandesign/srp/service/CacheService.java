@@ -5,15 +5,15 @@ import com.epam.cleandesign.srp.bean.Employee;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CaheService {
+public class CacheService {
 
-    private List<Employee> emaployeeCache = new ArrayList<>();;
+    private List<Employee> employeeCache = new ArrayList<>();;
 
     public synchronized List<Employee> getCache(){
-        return emaployeeCache;
+        return employeeCache;
     }
     public synchronized void addToCache(Employee emp){
-         emaployeeCache.add(emp);
+        employeeCache.add(emp);
     }
 
 

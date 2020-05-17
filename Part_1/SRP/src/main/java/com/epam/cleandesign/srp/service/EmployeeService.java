@@ -1,4 +1,8 @@
-package com.epam.cleandesign.srp;
+package com.epam.cleandesign.srp.service;
+
+import com.epam.cleandesign.srp.bean.Employee;
+import com.epam.cleandesign.srp.bean.EmployeeRole;
+import com.epam.cleandesign.srp.bean.EmployeeSeniority;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,10 +14,10 @@ import java.util.List;
 public class EmployeeService {
 
     private Connection connection;
-    private CaheService caheService;
+    private CacheService caheService;
     public EmployeeService(Connection connection){
         this.connection=connection;
-        caheService=new CaheService();
+        caheService=new CacheService();
     }
 
     public List<Employee> readEmployees() {

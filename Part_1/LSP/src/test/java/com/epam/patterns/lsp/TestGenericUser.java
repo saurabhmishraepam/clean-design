@@ -12,20 +12,16 @@ public class TestGenericUser {
     public void shouldNotGetValueOfAccessRightWhenRightIsProtected() {
         HashSet<String> protectedRights = new HashSet<>();
         protectedRights.add(WRITE_TO_DATABASE);
-
-        GenericUser genericUser = new GenericUser(protectedRights);
+        User genericUser = new GenericUser(protectedRights);
         genericUser.setupAccessRight(WRITE_TO_DATABASE, true);
-
         assertFalse(genericUser.getValueOfAccessRight(WRITE_TO_DATABASE));
     }
 
     @Test
     public void shouldGetValueOfAccessRightWhenRightIsNotProtected() {
         final String CHANGE_IN_DATABASE = "change in database";
-
-        GenericUser genericUser = new GenericUser(new HashSet<String>());
+        User genericUser = new GenericUser(new HashSet<String>());
         genericUser.setupAccessRight(CHANGE_IN_DATABASE, true);
-
         assertTrue(genericUser.getValueOfAccessRight(CHANGE_IN_DATABASE));
     }
 

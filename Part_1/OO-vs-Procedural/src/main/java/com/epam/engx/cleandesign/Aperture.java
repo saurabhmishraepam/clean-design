@@ -2,7 +2,6 @@ package com.epam.engx.cleandesign;
 
 public class Aperture {
 
-
     private double height;
     private double width;
 

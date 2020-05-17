@@ -10,7 +10,6 @@ public class TestDBAccess {
     public void testPowerUser() {
 
         PowerUser powerUser = new PowerUser();
-
         writeToDBForce(powerUser, "payload");
         assertEquals(readFromDB(), "payload");
     }

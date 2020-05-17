@@ -1,5 +1,8 @@
 package com.epam.cleandesign.srp;
 
+import com.epam.cleandesign.srp.bean.Employee;
+import com.epam.cleandesign.srp.bean.EmployeeRole;
+import com.epam.cleandesign.srp.bean.EmployeeSeniority;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -124,8 +127,8 @@ public class EmployeeManagerTest {
         final ArgumentCaptor<Message> propertiesCaptor = ArgumentCaptor.forClass(Message.class);
         mockStatic(Transport.class);
 
-        EmployeeManager manager = new EmployeeManager();
-        manager.sendEmployeesReport(mockConnection);
+        EmployeeManager manager = new EmployeeManager(mockConnection);
+        manager.sendEmployeesReport();
 
         verifyStatic(Transport.class);
         Transport.send(propertiesCaptor.capture());
@@ -135,20 +138,20 @@ public class EmployeeManagerTest {
         //check caching
         clearInvocations(resultSetMock);
         when(resultSetMock.next()).thenReturn(false);
-        manager.sendEmployeesReport(mockConnection);
+        manager.sendEmployeesReport();
         assertEquals(propertiesCaptor.getValue().getContent(), expected);
     }
 
     private void testJsonConvert(String json) throws Exception {
-        EmployeeManager manager = new EmployeeManager();
-        String serialized = manager.employeesAsJson(mockConnection);
+        EmployeeManager manager = new EmployeeManager(mockConnection);
+        String serialized = manager.employeesAsJson();
 
         JSONAssert.assertEquals(serialized, serialized, json, false);
 
         //check caching
         clearInvocations(resultSetMock);
         when(resultSetMock.next()).thenReturn(false);
-        serialized = manager.employeesAsJson(mockConnection);
+        serialized = manager.employeesAsJson();
         JSONAssert.assertEquals(serialized, serialized, json, false);
     }
 }
