@@ -3,7 +3,7 @@ package task;
 public class SkillsRecord extends Record {
 
     private String skill;
-    private Level level;
+    private SkillLevel level;
 
     public String getSkill() {
         return skill;
@@ -14,16 +14,18 @@ public class SkillsRecord extends Record {
         return this;
     }
 
-    public Level getLevel() {
+    public SkillLevel getLevel() {
         return level;
     }
 
-    public SkillsRecord setLevel(Level level) {
+    public SkillsRecord setLevel(SkillLevel level) {
         this.level = level;
         return this;
     }
 
-    public enum Level {
-        EXPERT, ADVANCED, INTERMEDIATE, NOVICE
+    @Override
+    public String format(){
+        return "skills: " + getSkill() + "=" + getLevel();
     }
+
 }

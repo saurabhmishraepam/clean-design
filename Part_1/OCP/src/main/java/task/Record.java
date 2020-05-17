@@ -11,4 +11,8 @@ public class Record {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String format(){
+        return "record no: " + getId();
+    }
 }

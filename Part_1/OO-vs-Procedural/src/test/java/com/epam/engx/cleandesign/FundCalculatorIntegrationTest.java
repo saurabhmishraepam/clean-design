@@ -36,7 +36,8 @@ public class FundCalculatorIntegrationTest {
 
     @Test (expected = WrongZoneTypeException.class)
     public void shouldThrowExceptionWhenZoneWithWrongType() {
-        assign(new Worker(250, 30), asList(new Zone("Other", 5.0, 5.0)));
+        assign(new Worker(250, 30),
+                asList(new Zone("Other", 5.0, 5.0)));
         fundCalculator.getFundBalance(assignments);
     }
 

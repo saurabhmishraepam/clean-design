@@ -1,36 +1,22 @@
 package task2;
 
-final class LoanCalculator {
+import task2.loantype.*;
+import task2.loantype.impl.CarLoanImpl;
+import task2.loantype.impl.HouseLoanImpl;
+import task2.loantype.impl.StudentLoanImpl;
 
-    int getStudentLoan(int age, int income) {
-        int loan = 100;
+public class LoanCalculator {
 
-        if (age >= 21) {
-            loan += 150;
+    private Loan studentLoan=new StudentLoanImpl();
+    private Loan carLoan=new CarLoanImpl();
+    private Loan houseLoan= new HouseLoanImpl();
+
+    public int getLoan(Person person, LoanType type){
+        switch(type){
+            case CAR: {return carLoan.getLoan(person);}
+            case STUDENT: {return studentLoan.getLoan(person);}
+            case HOUSE: {return  houseLoan.getLoan(person);}
         }
-
-        return IncomeMultiplier.multiply(loan, income);
-    }
-
-    int getCarLoan(int age, int income) {
-        int loan = 2_000;
-
-        if (age > 50) {
-            loan += 1_500;
-        } else if (age > 30) {
-            loan += 1_000;
-        }
-
-        return IncomeMultiplier.multiply(loan, income);
-    }
-
-    int getHouseLoan(int age, int income) {
-        int loan = 100_000;
-
-        if (age > 30 && income > loan / 2) {
-            loan *= 2;
-        }
-
-        return IncomeMultiplier.multiply(loan, income);
+        return -1;
     }
 }
